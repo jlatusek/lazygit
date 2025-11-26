@@ -380,6 +380,9 @@ type LogConfig struct {
 	ShowGraph string `yaml:"showGraph" jsonschema:"enum=always,enum=never,enum=when-maximised"`
 	// displays the whole git graph by default in the commits view (equivalent to passing the `--all` argument to `git log`)
 	ShowWholeGraph bool `yaml:"showWholeGraph"`
+
+	// Number of logs which we are willing to show in log view
+	Limit int64 `yaml:"limit" jsonschema:"minimum=1"`
 }
 
 type CommitPrefixConfig struct {
@@ -834,6 +837,7 @@ func GetDefaultConfig() *UserConfig {
 				Order:          "topo-order",
 				ShowGraph:      "always",
 				ShowWholeGraph: false,
+				Limit:          300,
 			},
 			LocalBranchSortOrder:         "date",
 			RemoteBranchSortOrder:        "date",
